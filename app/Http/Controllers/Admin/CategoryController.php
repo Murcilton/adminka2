@@ -50,7 +50,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view('admin.categories.edit', compact('category'));
     }
 
     /**
@@ -71,6 +72,9 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Category::find($id);
+        $category->destroy($id);
+        Category::destroy($id);
+        return redirect()->route('categories.index')->with('success', 'Категория удалена');
     }
 }
